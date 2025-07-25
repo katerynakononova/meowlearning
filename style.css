@@ -1,4 +1,7 @@
 /* style.css */
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -89,6 +92,12 @@ main {
   font-size: 0.9rem;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block; /* more flexible for mixed content */
+}
+
 .page-title {
   margin-top: 0;
   margin-bottom: 0.5rem; /* Зменшено */
@@ -113,6 +122,9 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;  
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .card-title-bar {
@@ -135,13 +147,7 @@ main {
   border-radius: 0;
   text-align: left;
   font-size: 0.85rem;
-}
-
-@media (min-width: 600px) {
-  .card.card-wide {
-    grid-column: span 3;
-    min-width: 540px; /* optional */
-  }
+  max-width: 100%;
 }
 
 .card h3 {
@@ -159,8 +165,9 @@ main {
   width: 100%;
   height: 450px;
   object-fit: cover;
+  min-height: 200px; /* optional fallback */
+  
   border-radius: 0.5rem;
-
   border: 1px solid #ccc;        /* Thin gray frame */
   box-sizing: border-box;        /* Keeps border inside the image size */
 }
@@ -195,11 +202,6 @@ main {
   text-decoration: underline;
 }
 
-/* Wide card that spans 3 columns */
-.card.card-wide {
-  grid-column: span 3;
-}
-
 .about-container {
   display: flex;
   gap: 1.5rem;
@@ -218,24 +220,7 @@ main {
 
 .about-text {
   flex: 1;
-}
-
-
-.profile {
-  width: 150px;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  flex-shrink: 0;       /* prevents image from shrinking */
-}
-
-.about-text {
-  flex: 1;
-}
-
-.about-text {
-  flex: 1;
-  margin-top: 0; /* Prevent paragraph spacing from shifting alignment */
-  justify-content: flex-start; /* Forces alignment to the top */
+  margin-top: 0; /* Prevent paragraph spacing from shifting alignment */  
 }
 
 .about-text a {
@@ -357,6 +342,23 @@ footer a:hover {
 
   .card {
     flex: 0 0 auto;
-    width: 240px; /* or whatever fixed width your cards normally have */
+    width: 240px;
+  }
+
+  .card.card-wide {
+    width: 720px; /* 3 x 240 */
+  }
+}
+
+@media (max-width: 600px) {
+  .card.card-wide {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 600px) {
+  .card.card-wide {
+    grid-column: span 3;
+    min-width: 540px; /* optional */
   }
 }
